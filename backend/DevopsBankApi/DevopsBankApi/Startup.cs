@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using DevopsBankApi.Models;
+using DevopsBankApi.Repositories;
+using DevopsBankApi.Services;
 
 namespace DevopsBankApi
 {
@@ -25,6 +29,18 @@ namespace DevopsBankApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+            services.AddDbContext<DtbankdbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("AzureDb"));
+            }
+           );
+
+            services.AddCors(options => options.AddPolicy("AllowAnyPolicy",
+                builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -41,6 +57,7 @@ namespace DevopsBankApi
                 app.UseHsts();
             }
 
+            app.UseCors("AllowAnyPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
