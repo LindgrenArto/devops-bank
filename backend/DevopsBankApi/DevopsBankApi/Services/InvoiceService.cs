@@ -18,27 +18,27 @@ namespace DevopsBankApi.Services
 
         public Invoice CreateInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            return _invoiceRepository.CreateInvoice(invoice);
         }
 
         public void Delete(long id)
         {
-            throw new NotImplementedException();
+            _invoiceRepository.Delete(id);
         }
 
         public List<Invoice> Read()
         {
-            throw new NotImplementedException();
+            return _invoiceRepository.Read();
         }
 
         public Invoice Read(long id)
         {
-            throw new NotImplementedException();
+            return _invoiceRepository.Read(id);
         }
 
         public Invoice Update(long id, Invoice invoice)
         {
-            throw new NotImplementedException();
+            return _invoiceRepository.Update(id, invoice);
         }
     }
 }
