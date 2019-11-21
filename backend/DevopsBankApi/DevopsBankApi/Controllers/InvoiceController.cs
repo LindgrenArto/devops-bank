@@ -37,7 +37,7 @@ namespace DevopsBankApi.Controllers
             return _invoiceService.CreateInvoice(invoice);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult<Invoice> Update(long id, Invoice invoice)
         {
             return _invoiceService.Update(id, invoice);
