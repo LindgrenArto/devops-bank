@@ -1,0 +1,87 @@
+<div fxFlexFill fxLayoutAlign="center center">
+  <mat-card class="example-card">
+    <h2 fxLayoutAlign="center" class="text-color">New Payment</h2>
+    <mat-horizontal-stepper #stepper [linear]="isLinear" class="stepper-style">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" fxLayoutAlign="center center" fxLayout="column">
+          <ng-template matStepLabel>IBAN</ng-template>
+          <label for="iban" class="text-above">IBAN</label>
+          <mat-form-field appearance="fill" fxLayoutAlign="center center">
+            <span style="color: #000000" matPrefix>FI</span>
+            <input style="color: #000000" matInput id="iban" pattern="[0-9]*" formControlName="iban"
+                   required minlength="16" maxlength="16">
+            <mat-error *ngIf="iban.invalid">{{getIBANErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <label for="bic" class="text-above">BIC</label>
+          <mat-form-field appearance="fill" fxLayoutAlign="center center">
+            <input style="color: #000000" matInput id="bic" formControlName="bic">
+            <mat-error *ngIf="bic.invalid">{{getBicErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <label for="senderName" class="text-above">Sender name</label>
+          <mat-form-field appearance="fill" fxLayoutAlign="center center">
+            <input style="color: #000000" matInput id="senderName" formControlName="senderName">
+            <mat-error *ngIf="senderName.invalid">{{getSenderNameErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button class="button-color" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit()" fxLayoutAlign="center center" fxLayout="column">
+          <ng-template matStepLabel>Payment details</ng-template>
+          <div fxLayout="row">
+            <div fxLayout="column">
+            <label for="invoiceNumber" class="text-above">Invoice number</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="invoiceNumber" formControlName="invoiceNumber">
+              <mat-error *ngIf="invoiceNumber.invalid">{{getInvoiceNumberErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <label for="name" class="text-above"> Recipient Name</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="name" formControlName="name">
+              <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <label for="dueday" class="text-above">Dueday</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="dueday" formControlName="dueday">
+              <mat-error *ngIf="dueday.invalid">{{getDuedayErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+          <div fxLayout="column" style="margin-left: 10px">
+            <label for="total" class="text-above">Total</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="total" formControlName="total">
+              <mat-error *ngIf="total.invalid">{{getTotalErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <label for="date" class="text-above">Date</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="date" formControlName="date">
+              <mat-error *ngIf="date.invalid">{{getDateErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <label for="reference" class="text-above">Reference</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="reference" formControlName="reference">
+              <mat-error *ngIf="reference.invalid">{{getReferenceErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        </div>
+          <div>
+            <button mat-raised-button class="button-color" matStepperPrevious>Back</button>
+            <button mat-raised-button class="button-color" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <form [formGroup]="thirdFormGroup" (ngSubmit)="onSubmit()" fxLayoutAlign="center center" fxLayout="column">
+          <ng-template matStepLabel>Confirm</ng-template>
+            <h2>Are you sure you want to complete a payment?</h2>
+          <div>
+            <button mat-raised-button class="button-color" matStepperPrevious>Back</button>
+            <button mat-raised-button class="button-color">Confirm</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>
