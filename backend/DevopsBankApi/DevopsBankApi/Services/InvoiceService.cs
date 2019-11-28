@@ -38,7 +38,16 @@ namespace DevopsBankApi.Services
 
         public Invoice Update(long id, Invoice invoice)
         {
-            return _invoiceRepository.Update(id, invoice);
+            var savedInvoice = _invoiceRepository.Read(id);
+
+            if(savedInvoice == null)
+            {
+                throw new Exception("Invoice not found!");
+            }
+            else
+            {
+                return _invoiceRepository.Update(id, invoice);
+            }
         }
     }
 }
