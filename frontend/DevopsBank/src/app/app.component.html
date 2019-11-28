@@ -1,0 +1,9 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav">
+
+  </mat-sidenav>
+  <mat-sidenav-content class="app-content">
+    <app-toolbar class="toolbar" (menuClick)="sidenav.toggle()"></app-toolbar>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
