@@ -1,6 +1,20 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav class="sidenav">
+    <h4 class="glow" fxLayoutAlign="center">Devops Bank</h4>
 
+    <div class="ic-send-btn">
+      <button mat-button class="ic-btn" (click)="navigateToHome()">
+        <mat-icon class="ic-color">home</mat-icon>
+        <span class="font">Koti</span>
+      </button>
+    </div>
+
+    <div class="ic-exit-btn">
+      <button mat-button class="ic-btn" (click)="navigateToList()">
+        <mat-icon class="ic-color">list</mat-icon>
+        <span class="font">Lista</span>
+      </button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content class="app-content">
     <app-toolbar class="toolbar" (menuClick)="sidenav.toggle()"></app-toolbar>
