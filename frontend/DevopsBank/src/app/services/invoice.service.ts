@@ -18,15 +18,15 @@ export class InvoiceService {
     return this.invoiceHttpService.getById(id);
   }
 
-  createInvoices(basicStudies: Invoice): Observable<Invoice> {
-    return this.invoiceHttpService.create(basicStudies);
+  createInvoices(invoice: Invoice): Observable<Invoice> {
+    return this.invoiceHttpService.create(invoice);
   }
 
-  editInvoices(basicStudies: Invoice): Observable<Invoice> {
-    return this.invoiceHttpService.edit(basicStudies);
+  editInvoices(invoice: Invoice): Observable<Invoice> {
+    return this.invoiceHttpService.edit(invoice);
   }
 
-  deleteInvoices(basicStudies: Invoice): Observable<any> {
-    return this.invoiceHttpService.delete(basicStudies);
+  deleteInvoices(invoice: Invoice): Observable<any> {
+    return this.invoiceHttpService.delete(invoice);
   }
 }

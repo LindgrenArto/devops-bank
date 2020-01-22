@@ -1,0 +1,23 @@
+<div fxFlexFill fxLayoutAlign="center center">
+<mat-accordion>
+  <mat-expansion-panel class="panel-style" *ngFor="let i of invoice">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="text-style">Lähettäjän nimi:&nbsp;</span>{{i.invoiceSender}}
+      </mat-panel-title>
+      <mat-panel-description fxLayoutAlign="center">
+        <span>Yhteensä:&nbsp;</span>{{i.total}}€
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout="column">
+      <div fxLayout="row"><span class="text-style">Vastaanottajan nimi:&nbsp;</span>{{i.recipientName}}</div>
+      <div fxLayout="row"><span class="text-style">IBAN:&nbsp;</span>{{i.recipientIban}}</div>
+      <div fxLayout="row"> <span class="text-style">BIC:&nbsp;</span>{{i.bic}}</div>
+      <div fxLayout="row"><span class="text-style">Viitenumero:&nbsp;</span>{{i.reference}}</div>
+      <div fxLayout="row"> <span class="text-style">Laskun numero:&nbsp;</span>{{i.invoiceNumber}}</div>
+      <div fxLayout="row"><span class="text-style">Päivämäärä:&nbsp;</span>{{i.date}}</div>
+      <div fxLayout="row"><span class="text-style">Eräpäivä:&nbsp;</span>{{i.dueDay}}</div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>

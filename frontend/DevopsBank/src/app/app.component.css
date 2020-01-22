@@ -7,11 +7,69 @@
 }
 
 .sidenav {
-  width: 80%;
+  width: auto;
   height: auto;
+  background-position: top;
+  background-image: url("../assets/img/sidenav_background.png");
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 25%;
   background-color: #1B1B1B;
+}
+
+.ic-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.ic-color {
+  padding-right: 10px;
+  color: #FFFF;
+}
+
+.font {
+  color: #FFFF;
+  font-weight: 400;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.ic-send-btn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  transform: translate(-10%, -32%);
+}
+
+.ic-exit-btn {
+  position: absolute;
+  left: 10%;
+  top: 35%;
+  transform: translate(-10%, -4%);
+}
+
+.sidenav-text {
+  color: #FFFFFF;
+  margin-top: 100px;
+}
+
+.glow {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #232526, 0 0 10px #232526, 0 0 12px #232526, 0 0 15px #232526, 0 0 17px #232526;
+  }
+  to {
+    text-shadow: 0 0 3px #fff, 0 0 6px #414345, 0 0 8px #414345, 0 0 11px #414345, 0 0 13px #414345, 0 0 16px #414345, 0 0 18px #414345;
+  }
 }
 
 .toolbar {

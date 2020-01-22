@@ -9,10 +9,10 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class InvoiceHttpService {
-  url: string;
+  private url: string;
 
   constructor(private httpClient: HttpClient) {
-    // this.url = environment.apiEndPointUrl + '';
+    this.url = environment.apiEndPointUrl + '/api/invoice';
   }
 
   get(): Observable<Invoice[]> {
