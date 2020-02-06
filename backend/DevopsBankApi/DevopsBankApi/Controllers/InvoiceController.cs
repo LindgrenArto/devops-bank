@@ -37,6 +37,18 @@ namespace DevopsBankApi.Controllers
             return _invoiceService.CreateInvoice(invoice);
         }
 
+        [HttpPost]
+        public ActionResult Post([FromBody] Invoice invoice)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var item = _invoiceService.CreateInvoice(invoice);
+            return CreatedAtAction("Get", new { id = item.Id }, item);
+        }
+
         [HttpPut("{id}")]
         public ActionResult<Invoice> Update(long id, Invoice invoice)
         {
@@ -46,8 +58,17 @@ namespace DevopsBankApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(long id)
         {
-            _invoiceService.Delete(id);
-            return new NoContentResult();
+           var existing = _invoiceService.Read(id);
+            if(existing == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _invoiceService.Delete(id);
+                return new NoContentResult();
+            }
+            
         }
     }
 }
