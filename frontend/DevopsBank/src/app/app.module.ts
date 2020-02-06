@@ -5,24 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  MAT_DATE_LOCALE,
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatDatepickerModule, MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
-  MatSidenavModule, MatStepperModule,
+  MatInputModule, MatListModule, MatNativeDateModule,
+  MatSidenavModule, MatSnackBarModule, MatStepperModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import { ToolbarComponent } from './ui/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {ListComponent} from './components/list/list.component';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    HomeComponent
+    HomeComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +42,18 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    MatTableModule,
+    MatExpansionModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
