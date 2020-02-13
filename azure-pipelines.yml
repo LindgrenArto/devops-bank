@@ -36,16 +36,12 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
-- task: VSTest@2
+
+- task: DotNetCoreCLI@2
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-        **\bin\$(BuildConfiguration)\**\*test*.dll 
-        !**\obj\**  
-        !**\xunit.runner.visualstudio.testadapter.dll      
-        !**\xunit.runner.visualstudio.dotnetcore.testadapter.dll
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    testFiltercriteria: 'TestCategory="UnitTests"'
+    command: test
+    projects: '**/*XUnitDevopsBank/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 
 - task: AzureWebApp@1
