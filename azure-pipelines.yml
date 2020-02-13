@@ -40,11 +40,13 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-        **\bin\$(BuildConfiguration)\**\*test*.dll
-        !**\obj\**
-        !**\xunit.runner.visualstudio.testadapter.dll
+        **\bin\$(BuildConfiguration)\**\*test*.dll 
+        !**\obj\**  
+        !**\xunit.runner.visualstudio.testadapter.dll      
         !**\xunit.runner.visualstudio.dotnetcore.testadapter.dll
     searchFolder: '$(System.DefaultWorkingDirectory)'
+    testFiltercriteria: 'TestCategory="UnitTests"'
+
 
 - task: AzureWebApp@1
   inputs:
