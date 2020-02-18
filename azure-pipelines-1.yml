@@ -16,10 +16,6 @@ steps:
   displayName: 'Install Node.js'
 
 
-- script: |
-    npm test
-  displayName: 'npm testing'
-
 
 - script: |
     npm install -g @angular/cli
