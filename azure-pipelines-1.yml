@@ -16,11 +16,10 @@ steps:
   displayName: 'Install Node.js'
 
 
-- script: npm audit fix
-
 - script: |
     npm install -g @angular/cli
     npm install
+    npm audit fix
     ng build --prod --base-href / --aot --build-optimizer=true --vendor-chunk=true --optimization=true
   displayName: 'npm install and build'
 
