@@ -17,6 +17,7 @@ steps:
 
 
 - script: |
+    cd frontend/DevopsBank
     npm install -g @angular/cli
     npm install
     npm audit fix
