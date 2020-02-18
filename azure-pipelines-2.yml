@@ -17,7 +17,7 @@ steps:
 
 - script: |
     npm install -g @angular/cli
-    cd devops-bank/frontend/DevopsBank
+    cd frontend/DevopsBank
     npm install
     ng build --prod
   displayName: 'npm install and build'
