@@ -4,6 +4,31 @@
   background-color: #EAEAEA;
 }
 
+.title {
+  text-align: center;
+}
+
+.confirm-card {
+  width: 400px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.input-style {
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.input-style::placeholder {
+  text-transform: initial;
+}
+
+.error-style{
+  margin-left: 15px;
+  margin-top: 6px;
+}
+
 .stepper-style {
   background-color: #EAEAEA;
 }
@@ -31,6 +56,7 @@
 .header-title {
   font-size: 12px;
   color: #949494;
+  display: flex;
 }
 
 .header {
@@ -46,7 +72,13 @@ mat-card-header {
   display: inline-block;
 }
 
-::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+.mat-form-field-flex > .mat-form-field-infix::ng-deep {
   padding: 0 0 10px 0!important;
   margin-top: -12px;
+}
+
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button {
+  width: 0 !important;
+  height: 0 !important;
 }

@@ -1,5 +1,5 @@
 export class Invoice {
-  id: bigint;
+  id: number;
   invoiceSender: string;
   recipientName: string;
   recipientIban: string;
@@ -10,7 +10,7 @@ export class Invoice {
   dueDay: Date;
   date: Date;
 
-  constructor(id?: bigint, invoiceSender?: string, recipientName?: string, recipientIban?: string, reference?: string,
+  constructor(id?: number, invoiceSender?: string, recipientName?: string, recipientIban?: string, reference?: string,
               invoiceNumber?: string, bic?: string, total?: number, dueDay?: Date, date?: Date) {
     this.id = id;
     this.invoiceSender = invoiceSender;

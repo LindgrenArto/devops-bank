@@ -7,7 +7,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   @Output() menuClick: EventEmitter<any>;
-  isActive = false;
+  isActive = true;
 
   constructor() {
     this.menuClick = new EventEmitter<any>();

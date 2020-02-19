@@ -2,106 +2,110 @@
   <mat-card class="example-card">
     <h2 fxLayoutAlign="center" class="title">Uusi maksu</h2>
     <form [formGroup]="formGroup">
-    <mat-horizontal-stepper #stepper [linear]="isLinear" class="stepper-style" formArrayName="formArray">
-      <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
-        <div fxLayoutAlign="center center" fxLayout="column">
-          <ng-template matStepLabel>Lähettäjän tiedot</ng-template>
-          <label for="iban" class="title">IBAN</label>
-          <mat-form-field appearance="fill" fxLayoutAlign="center center">
-            <input style="color: #000000" matInput id="iban" pattern="[F][I]{1,2}[0-9]*" formControlName="iban"
-                   required minlength="16" maxlength="16" placeholder="esim. FI1234123412341234"
-                   [(ngModel)]="invoice.recipientIban">
-            <mat-error *ngIf="iban.invalid">{{getIBANErrorMessage()}}</mat-error>
-          </mat-form-field>
-          <label for="bic" class="title">BIC</label>
-          <mat-form-field appearance="fill" fxLayoutAlign="center center">
-            <input style="color: #000000" matInput id="bic" formControlName="bic" pattern="[A-Z]*" placeholder="esim. SBANFIHH" [(ngModel)]="invoice.bic">
-            <mat-error *ngIf="bic.invalid">{{getBicErrorMessage()}}</mat-error>
-          </mat-form-field>
-          <label for="senderName" class="title">Lähettäjän nimi</label>
-          <mat-form-field appearance="fill" fxLayoutAlign="center center">
-            <input style="color: #000000" matInput id="senderName" formControlName="senderName" pattern="[A-Za-z-ÄÖäöÅå\s]*" placeholder="esim. John Doe" [(ngModel)]="invoice.invoiceSender">
-            <mat-error *ngIf="senderName.invalid">{{getSenderNameErrorMessage()}}</mat-error>
-          </mat-form-field>
-          <div>
-            <button mat-raised-button class="button-color" matStepperNext>Seuraava</button>
-          </div>
-        </div>
-      </mat-step>
-      <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" fxLayoutAlign="center center" fxLayout="column">
-        <div fxLayoutAlign="center center" fxLayout="column">
-          <ng-template matStepLabel>Vastaanottajan tiedot</ng-template>
-          <div fxLayout="row">
-            <div fxLayout="column">
-              <label for="invoiceNumber" class="title">Laskun numero</label>
-              <mat-form-field appearance="fill" fxLayoutAlign="center center">
-                <input style="color: #000000" matInput id="invoiceNumber" formControlName="invoiceNumber" pattern="[0-9]*" placeholder="esim. 1234" [(ngModel)]="invoice.invoiceNumber">
-                <mat-error *ngIf="invoiceNumber.invalid">{{getInvoiceNumberErrorMessage()}}</mat-error>
-              </mat-form-field>
-              <label for="name" class="title">Vastaanottajan nimi</label>
-              <mat-form-field appearance="fill" fxLayoutAlign="center center">
-                <input style="color: #000000" matInput id="name" formControlName="name" pattern="[A-Za-z-ÄÖäöÅå\s]*" placeholder="esim. John Doe" [(ngModel)]="invoice.recipientName">
-                <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
-              </mat-form-field>
-              <label for="dueday" class="title">Eräpäivä</label>
-              <mat-form-field appearance="fill" fxLayoutAlign="center center">
-                <input style="color: #000000" matInput id="dueday" formControlName="dueday" [matDatepicker]="picker" readonly [(ngModel)]="invoice.dueDay">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="dueday.invalid">{{getDuedayErrorMessage()}}</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxLayout="column" style="margin-left: 10px">
-              <label for="total" class="title">Summa</label>
-              <mat-form-field appearance="fill" fxLayoutAlign="center center">
-                <input style="color: #000000" matInput id="total" formControlName="total" pattern="[0-9]+(\d*[.][0-9]{1,2})?" [(ngModel)]="invoice.total">
-                <mat-error *ngIf="total.invalid">{{getTotalErrorMessage()}}</mat-error>
-              </mat-form-field>
-              <label for="date" class="title">Maksun päivämäärä</label>
-              <mat-form-field appearance="fill" fxLayoutAlign="center center">
-                <input style="color: #000000" matInput id="date" formControlName="date" [matDatepicker]="pickerDate" readonly [(ngModel)]="invoice.date">
-                <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
-                <mat-datepicker #pickerDate></mat-datepicker>
-                <mat-error *ngIf="date.invalid">{{getDateErrorMessage()}}</mat-error>
-              </mat-form-field>
-              <label for="reference" class="title">Viitenumero</label>
-              <mat-form-field appearance="fill" fxLayoutAlign="center center">
-                <input [(ngModel)]="invoice.reference" style="color: #000000" matInput id="reference"
-                       formControlName="reference" pattern="[0-9\s]*" placeholder="esim. 1234 1234 1234" (keyup)="referenceValidation()">
-                <mat-error *ngIf="reference.invalid">{{getReferenceErrorMessage()}}</mat-error>
-              </mat-form-field>
+      <mat-horizontal-stepper #stepper [linear]="isLinear" class="stepper-style" formArrayName="formArray">
+        <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+          <div fxLayoutAlign="center center" fxLayout="column">
+            <ng-template matStepLabel>Lähettäjän tiedot</ng-template>
+            <label for="iban" class="title">IBAN</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input class="input-style" matInput id="iban" (ngModelChange)="isValidIban()"
+                     formControlName="iban" pattern="^[F,f][I,i]{1,2}(?:[ ]?[0-9]){16}$"
+                     required placeholder="esim.FI4250001510000023"
+                     [(ngModel)]="invoice.recipientIban" mask="AA00 0000 0000 0000 00">
+              <mat-error *ngIf="iban.invalid">Iban vaaditaan tai se on virheellinen</mat-error>
+            </mat-form-field>
+            <label for="bic" class="title">BIC</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input class="input-style" matInput id="bic" formControlName="bic" placeholder="esim.SBANFIHH" [(ngModel)]="invoice.bic"
+              pattern="^[a-zA-Z]{3}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$">
+              <mat-error *ngIf="bic.invalid">Bic vaaditaan tai se on virheellinen</mat-error>
+            </mat-form-field>
+            <label for="senderName" class="title">Lähettäjän nimi</label>
+            <mat-form-field appearance="fill" fxLayoutAlign="center center">
+              <input style="color: #000000" matInput id="senderName" formControlName="senderName" pattern="^[A-Za-z-ÄÖäöÅå\s]*$" placeholder="esim.John Doe" [(ngModel)]="invoice.invoiceSender">
+              <mat-error *ngIf="senderName.invalid">Lähettäjän nimi vaaditaan</mat-error>
+            </mat-form-field>
+            <div>
+              <button id="nextBtn" [disabled]="!isValidIban()" mat-raised-button class="button-color" type="button" matStepperNext>Seuraava</button>
             </div>
           </div>
-          <div>
-            <button mat-raised-button class="button-color" matStepperPrevious>Takaisin</button>
-            <button mat-raised-button class="button-color" matStepperNext>Seuraava</button>
-          </div>
-        </div>
-      </mat-step>
-      <mat-step>
-        <div fxLayoutAlign="center center" fxLayout="column">
-          <ng-template matStepLabel>Vahvistus</ng-template>
-          <h2>Tarkista täyttämiesi tietojen oikeellisuus</h2>
-          <mat-card>
-            <div fxLayout="column">
-              <div class="header" fxLayout="row"><span class="header-title">IBAN:&nbsp;</span>{{invoice.recipientIban}}</div>
-              <div class="header" fxLayout="row"> <span class="header-title">BIC:&nbsp;</span>{{invoice.bic}}</div>
-              <div class="header" fxLayout="row"> <span class="header-title">Lähettäjän nimi:&nbsp;</span>{{invoice.invoiceSender}}</div>
-              <div class="header" fxLayout="row"> <span class="header-title">Laskun numero:&nbsp;</span>{{invoice.invoiceNumber}}</div>
-              <div class="header" fxLayout="row"> <span class="header-title">Summa:&nbsp;</span>{{invoice.total}}€</div>
-              <div class="header" fxLayout="row"><span class="header-title">Vastaanottajan nimi:&nbsp;</span>{{invoice.recipientName}}</div>
-              <div class="header" fxLayout="row"><span class="header-title">Laskun päivämäärä:&nbsp;</span>{{invoice.date}}</div>
-              <div class="header" fxLayout="row"><span class="header-title">Eräpäivä:&nbsp;</span>{{invoice.dueDay}}</div>
-              <div class="header" fxLayout="row"><span class="header-title">Viitenumero:&nbsp;</span>{{invoice.reference}}</div>
+        </mat-step>
+        <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" fxLayoutAlign="center center" fxLayout="column">
+          <div fxLayoutAlign="center center" fxLayout="column">
+            <ng-template matStepLabel>Vastaanottajan tiedot</ng-template>
+            <div fxLayout="row">
+              <div fxLayout="column">
+                <label for="invoiceNumber" class="title">Laskun numero</label>
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <input style="color: #000000" matInput id="invoiceNumber" formControlName="invoiceNumber" pattern="^[0-9-]*$" placeholder="esim.1234" [(ngModel)]="invoice.invoiceNumber">
+                  <mat-error *ngIf="invoiceNumber.invalid">Laskun numero vaaditaan tai se on virheellinen</mat-error>
+                </mat-form-field>
+                <label for="name" class="title">Vastaanottajan nimi</label>
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <input style="color: #000000" matInput id="name" formControlName="name" pattern="^[A-Za-z-ÄÖäöÅå\s]*$" placeholder="esim.John Doe" [(ngModel)]="invoice.recipientName">
+                  <mat-error *ngIf="name.invalid">Maksun saajan nimi vaaditaan</mat-error>
+                </mat-form-field>
+                <label for="dueday" class="title">Eräpäivä</label>
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <input style="color: #000000" matInput id="dueday" formControlName="dueday" [matDatepicker]="picker" readonly [(ngModel)]="invoice.dueDay">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="dueday.invalid">Eräpäivä vaaditaan</mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" style="margin-left: 10px">
+                <label for="total" class="title">Summa</label>
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <input style="color: #000000" matInput id="total" formControlName="total" suffix="€" placeholder="esim.120.25€"
+                         mask="separator.2" [specialCharacters]="[',']" pattern="^[0-9]+(\d*[.][0-9]{1,2})?$" [(ngModel)]="invoice.total">
+                  <mat-error *ngIf="total.invalid">Summa vaaditaan tai se on virheellinen (vain piste kelpaa erottajaksi)</mat-error>
+                </mat-form-field>
+                <label for="date" class="title">Maksun päivämäärä</label>
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <input style="color: #000000" matInput id="date" formControlName="date" [matDatepicker]="pickerDate" readonly [(ngModel)]="invoice.date">
+                  <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerDate></mat-datepicker>
+                  <mat-error *ngIf="date.invalid">Päivämäärä vaaditaan</mat-error>
+                </mat-form-field>
+                <label for="reference" class="title">Viitenumero</label>
+                <mat-form-field appearance="fill" fxLayoutAlign="center center">
+                  <input [(ngModel)]="invoice.reference" style="color: #000000" matInput id="reference"
+                         formControlName="reference" placeholder="esim.12345672"
+                  (change)="isValidReference()">
+                  <mat-error *ngIf="reference.invalid">Viitenumero vaaditaan tai se on virheellinen</mat-error>
+                </mat-form-field>
+              </div>
             </div>
-          </mat-card>
-          <div>
-            <button mat-raised-button class="button-color" matStepperPrevious>Takaisin</button>
-            <button mat-raised-button class="button-color" (click)="onSave()">Lähetä</button>
+            <div>
+              <button mat-raised-button class="button-color" type="button" matStepperPrevious>Takaisin</button>
+              <button [disabled]="isValidReference() === false" type="button" mat-raised-button class="button-color" matStepperNext>Seuraava</button>
+            </div>
           </div>
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
+        </mat-step>
+        <mat-step>
+          <div fxLayoutAlign="center center" fxLayout="column">
+            <ng-template matStepLabel>Vahvistus</ng-template>
+            <h2>Tarkista täyttämiesi tietojen oikeellisuus</h2>
+            <mat-card class="confirm-card">
+              <div fxLayout="column">
+                <div class="header" fxLayout="row"><span class="header-title">IBAN:&nbsp;</span>{{invoice.recipientIban | mask: 'AA00 0000 0000 0000 00'}}</div>
+                <div class="header" fxLayout="row"> <span class="header-title">BIC:&nbsp;</span>{{invoice.bic}}</div>
+                <div class="header" fxLayout="row"> <span class="header-title">Lähettäjän nimi:&nbsp;</span>{{invoice.invoiceSender}}</div>
+                <div class="header" fxLayout="row"> <span class="header-title">Laskun numero:&nbsp;</span>{{invoice.invoiceNumber}}</div>
+                <div class="header" fxLayout="row"> <span class="header-title">Summa:&nbsp;</span>{{invoice.total}}€</div>
+                <div class="header" fxLayout="row"><span class="header-title">Vastaanottajan nimi:&nbsp;</span>{{invoice.recipientName}}</div>
+                <div class="header" fxLayout="row"><span class="header-title">Laskun päivämäärä:&nbsp;</span>{{invoice.date | date: 'dd/MM/yyyy'}}</div>
+                <div class="header" fxLayout="row"><span class="header-title">Eräpäivä:&nbsp;</span>{{invoice.dueDay | date: 'dd/MM/yyyy'}}</div>
+                <div class="header" fxLayout="row"><span class="header-title">Viitenumero:&nbsp;</span>{{invoice.reference}}</div>
+              </div>
+            </mat-card>
+            <div>
+              <button mat-raised-button class="button-color" type="button" matStepperPrevious>Takaisin</button>
+              <button id="saveBtn" mat-raised-button class="button-color" type="button" (click)="onSave()">Lähetä</button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
     </form>
   </mat-card>
 </div>

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Invoice} from '../../models/invoice';
 import {InvoiceService} from '../../services/invoice.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +16,6 @@ import {Observable} from 'rxjs';
   ],
 })
 export class ListComponent implements OnInit {
-  panelOpenState = false;
   invoice: Invoice[];
 
   constructor(private invoiceService: InvoiceService) {

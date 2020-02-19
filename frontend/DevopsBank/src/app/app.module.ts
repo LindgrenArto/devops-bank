@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,9 +9,8 @@ import {
   MatCardModule, MatDatepickerModule, MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatListModule, MatNativeDateModule,
-  MatSidenavModule, MatSnackBarModule, MatStepperModule, MatTableModule,
-  MatToolbarModule
+  MatInputModule, MatNativeDateModule, MatSelectModule,
+  MatSidenavModule, MatSnackBarModule, MatStepperModule, MatTableModule, MatToolbarModule
 } from '@angular/material';
 import { ToolbarComponent } from './ui/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -20,6 +18,11 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ListComponent} from './components/list/list.component';
+import {AngularIbanModule} from 'angular-iban';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+import {NgModule} from '@angular/core';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 // @ts-ignore
 @NgModule({
@@ -49,7 +52,10 @@ import {ListComponent} from './components/list/list.component';
     MatNativeDateModule,
     FormsModule,
     MatTableModule,
-    MatExpansionModule
+    MatExpansionModule,
+    AngularIbanModule,
+    MatSelectModule,
+    NgxMaskModule.forRoot(options)
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
