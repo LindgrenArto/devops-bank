@@ -27,7 +27,6 @@ import construct = Reflect.construct;
 // @ts-ignore
 export const options: Partial<IConfig> | (() => Partial<IConfig>);
 
-// @ts-ignore
 
 @NgModule({
   declarations: [
