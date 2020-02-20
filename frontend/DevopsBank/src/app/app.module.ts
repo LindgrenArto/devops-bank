@@ -21,12 +21,8 @@ import {ListComponent} from './components/list/list.component';
 import {AngularIbanModule} from 'angular-iban';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
 import {NgModule} from '@angular/core';
-import construct = Reflect.construct;
 
-
-// @ts-ignore
-export const options: Partial<IConfig> | (() => Partial<IConfig>);
-
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
