@@ -21,15 +21,17 @@ steps:
     npm install -g @angular/cli
     npm install
     npm audit fix
-    ng test
     ng build --prod --base-href / --aot --build-optimizer=true --vendor-chunk=true --optimization=true
   displayName: 'npm install and build'
-
 
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
+
+- script: | 
+    cd frontend/DevopsBank
+    ng test
 
 - task: AzureWebApp@1
   inputs:
