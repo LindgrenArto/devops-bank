@@ -21,21 +21,23 @@ steps:
     npm install -g @angular/cli
     npm install
     npm install karma-junit-reporter --save-dev
-    karma test --reporter karma-junit-reporter
     npm audit fix
     ng build --prod --base-href / --aot --build-optimizer=true --vendor-chunk=true --optimization=true
   displayName: 'npm install and build'
+
+- script: |
+    cd frontend/DevopsBank
+    karma test --reporter karma-junit-reporter
 
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
 
-
 - task: AzureWebApp@1
   inputs:
-      azureSubscription: 'Azure for Students Starter (6937b435-043a-49e1-8f7a-2c3d52817a1a)'
-      appType: 'webApp'
-      appName: 'devopsfrontapp'
-      package: '$(System.DefaultWorkingDirectory)'
-      deploymentMethod: 'auto'
+    azureSubscription: 'Azure for Students Starter (6937b435-043a-49e1-8f7a-2c3d52817a1a)'
+    appType: 'webApp'
+    appName: 'devopsfrontapp'
+    package: '$(System.DefaultWorkingDirectory)'
+    deploymentMethod: 'auto'
