@@ -27,7 +27,7 @@ steps:
 
 - script: |
     cd frontend/DevopsBank
-    karma test --reporter karma-junit-reporter
+    ng test
 
 - task: ArchiveFiles@2
   inputs:
