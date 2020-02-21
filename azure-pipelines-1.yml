@@ -20,7 +20,8 @@ steps:
     cd frontend/DevopsBank
     npm install -g @angular/cli
     npm install
-    ng test
+    npm install karma-junit-reporter --save-dev
+    ng test --reporter karma-junit-reporter
     npm audit fix
     ng build --prod --base-href / --aot --build-optimizer=true --vendor-chunk=true --optimization=true
   displayName: 'npm install and build'
