@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@types/iban": "0.0.30",
-    "acorn": "^7.1.0",
+    "acorn": "^7.1.1",
     "angular-iban": "^0.2.0",
     "finnish-bank-utils": "^1.3.3",
     "hammerjs": "^2.0.8",
